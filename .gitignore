@@ -39,11 +39,12 @@ env/
 *.onnx
 *.engine
 
-# Video files
+# Video files (keep sample.mp4 as demo input)
 *.mp4
 *.avi
 *.mkv
 *.mov
+!sample.mp4
 
 # Output files
 result*.mp4

@@ -1,5 +1,9 @@
 # Single-Pedestrian Video Tracker
 
+<div align="right">
+  <a href="README.zh.md">🇨🇳 中文</a>
+</div>
+
 A lightweight single-pedestrian tracker for crowded video scenes, built with **YOLOv8** detection and multi-cue matching (motion prediction + color histogram + NCC template verification). No tracker IDs or deep learning re-ID models required — it selects the best-matching person independently on every frame.
 
 ![First frame target selection](first_frame.jpg)
@@ -29,9 +33,11 @@ pip install -r requirements.txt
 
 > The YOLOv8n model (`yolov8n.pt`) will be **auto-downloaded** by `ultralytics` on the first run.
 
-### 2. Prepare input video
+### 2. Input video
 
-Place your input video as `sample.mp4` in the project root. The first frame should show the target pedestrian in the lower-center region of the frame — the tracker auto-selects the best candidate based on position, size, and centrality.
+A demo video `sample.mp4` is included. The first frame shows the target pedestrian in the lower-center region — the tracker auto-selects the best candidate based on position, size, and centrality.
+
+> You can also replace it with your own video (keep the filename `sample.mp4`, or edit `video_path` in the script).
 
 ### 3. Run
 
@@ -62,6 +68,7 @@ Output videos (`result.mp4` / `result_nocc.mp4`) will be generated in the same f
 .
 ├── track.py          # Full tracker (YOLO + motion + color + NCC)
 ├── track_nocc.py     # Baseline tracker (YOLO + motion + color)
+├── sample.mp4        # Demo input video
 ├── requirements.txt  # Python dependencies
 ├── first_frame.jpg   # Example: target auto-selection on frame 0
 └── highlights.pdf    # Technical highlights & design rationale
@@ -77,11 +84,15 @@ Output videos (`result.mp4` / `result_nocc.mp4`) will be generated in the same f
 
 See `requirements.txt` for pinned versions.
 
-## Limitations
+## Comparison: `track.py` vs `track_nocc.py`
 
-- Designed for **single-target** tracking in moderately crowded scenes.
-- Target is fixed after frame 0 (no interactive re-selection mid-video).
-- Assumes the target remains a "person" class throughout; occlusions longer than a few frames may cause drift.
+| | `track.py` | `track_nocc.py` |
+|---|---|---|
+| **NCC verification** | ✅ Multi-scale template matching | ❌ None |
+| **False-positive resistance** | High (NCC threshold ≥ 0.55) | Moderate |
+| **Speed** | Slightly slower (template pyramid + NCC search) | Faster |
+| **Best for** | Crowded scenes, heavy occlusion | Clean backgrounds, quick demos |
+| **Recommended?** | ✅ Yes | For baseline comparison |
 
 ## License
 
