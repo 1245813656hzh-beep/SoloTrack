@@ -6,7 +6,7 @@
 
 一款轻量级的单行人追踪器，适用于拥挤场景的视频。基于 **YOLOv8** 检测与多线索匹配（运动预测 + 颜色直方图 + NCC 模板验证）。无需追踪器 ID 或深度学习重识别模型 —— 每一帧都独立选出最匹配的行人。
 
-![第一帧目标选择](first_frame.jpg)
+![演示追踪结果](result.gif)
 
 ## 特性
 
@@ -80,7 +80,7 @@ python track_nocc.py
 ├── track_nocc.py     # 基线追踪器（YOLO + 运动 + 颜色）
 ├── sample.mp4        # 演示输入视频
 ├── requirements.txt  # Python 依赖
-├── first_frame.jpg   # 示例：第 0 帧自动选择目标
+├── result.gif        # 演示：完整追踪结果（由 result.mp4 生成）
 └── highlights.pdf    # 技术亮点与设计说明
 ```
 

@@ -6,7 +6,7 @@
 
 A lightweight single-pedestrian tracker for crowded video scenes, built with **YOLOv8** detection and multi-cue matching (motion prediction + color histogram + NCC template verification). No tracker IDs or deep learning re-ID models required — it selects the best-matching person independently on every frame.
 
-![First frame target selection](first_frame.jpg)
+![Demo tracking result](result.gif)
 
 ## Features
 
@@ -70,7 +70,7 @@ Output videos (`result.mp4` / `result_nocc.mp4`) will be generated in the same f
 ├── track_nocc.py     # Baseline tracker (YOLO + motion + color)
 ├── sample.mp4        # Demo input video
 ├── requirements.txt  # Python dependencies
-├── first_frame.jpg   # Example: target auto-selection on frame 0
+├── result.gif        # Demo: full tracking result (generated from result.mp4)
 └── highlights.pdf    # Technical highlights & design rationale
 ```
 
